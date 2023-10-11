@@ -2,11 +2,10 @@ import os
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
-# import wandb
 
-os.environ["WANDB_PROJECT"]="length-controllable-summarisation"
-os.environ["WANDB_LOG_MODEL"]="false"
-os.environ["WANDB_WATCH"]="false"
+os.environ["WANDB_PROJECT"] = "length-controllable-summarisation"
+os.environ["WANDB_LOG_MODEL"] = "false"
+os.environ["WANDB_WATCH"] = "false"
 
 from transformers import (
     AutoTokenizer,
