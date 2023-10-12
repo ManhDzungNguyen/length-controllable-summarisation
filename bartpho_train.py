@@ -99,7 +99,7 @@ def train(pretrained_model, input_file, saved_dir):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model, tokenizer = get_model(pretrained_model)
 
-    tokenizer.save_pretrained(os.path.join(WORKING_DIR, "models/summary/tokenizer"))
+    tokenizer.save_pretrained(os.path.join(WORKING_DIR, "models/summary/bartpho/tokenizer"))
 
     train_dataset, eval_dataset = process_data(input_file, tokenizer)
     model.to(device)
@@ -137,5 +137,5 @@ if __name__ == "__main__":
     train(
         pretrained_model="vinai/bartpho-word",
         input_file=os.path.join(WORKING_DIR, "data/SentEnum_summary.json"),
-        saved_dir=os.path.join(WORKING_DIR, "models/summary"),
+        saved_dir=os.path.join(WORKING_DIR, "models/summary/bartpho"),
     )

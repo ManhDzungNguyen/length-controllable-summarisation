@@ -3,8 +3,6 @@ import json
 import time
 import random
 
-random.seed(42)
-
 from tqdm import tqdm
 import pandas as pd
 from py_vncorenlp import VnCoreNLP
@@ -13,17 +11,20 @@ import ctranslate2
 
 from function.article_handler import clean_article
 
+random.seed(42)
+
+
 WORKING_DIR = "/home2/dungnguyen/length-controllable-summarisation"
 
 vi_segmenter = VnCoreNLP(
     save_dir=os.path.join(WORKING_DIR, "models/vncorenlp"), annotators=["wseg"]
 )
 
-tokenizer = AutoTokenizer.from_pretrained(
-    os.path.join(WORKING_DIR, "models/summary/checkpoint-1100")
-)
-model_path = os.path.join(WORKING_DIR, "models/quantized/ct2_model_checkpoint-1100")
-model = ctranslate2.Translator(model_path, compute_type="int8", device="cuda")
+tokenizer_dir = os.path.join(WORKING_DIR, "models/summary/bartpho/tokenizer")
+model_dir = os.path.join(WORKING_DIR, "models/quantized/bartpho/ct2_model_checkpoint-1100")
+
+tokenizer = AutoTokenizer.from_pretrained(tokenizer_dir)
+model = ctranslate2.Translator(model_dir, compute_type="int8", device="cuda")
 
 
 def wseg(sent=""):
@@ -51,7 +52,7 @@ def generate_prompt(context, no_sen=5):
     return prompt_wseg
 
 
-def generate_ct2(context, no_sen=5, beam_size=5, num_outputs=1):
+def bartpho_ct2_summarise(context, no_sen=5, beam_size=5, num_outputs=1):
     beam_size = max(beam_size, num_outputs)
     prompt = generate_prompt(context, no_sen=no_sen)
     input_tokens = tokenizer.convert_ids_to_tokens(
@@ -101,7 +102,7 @@ if __name__ == "__main__":
         record["content"] = clean_article(article)
 
         for no_sen in range(3, 10):
-            record[f"sum_{no_sen}"] = generate_ct2(
+            record[f"sum_{no_sen}"] = bartpho_ct2_summarise(
                 context=record["content"], no_sen=no_sen
             )
 
@@ -109,7 +110,7 @@ if __name__ == "__main__":
 
     df = pd.DataFrame(summary_data)
     df.to_excel(
-        os.path.join(WORKING_DIR, "data/231011_summary_ct2_bartpho.xlsx"),
+        os.path.join(WORKING_DIR, "data/result/231011_summary_ct2_bartpho.xlsx"),
         sheet_name="summary",
         index=False,
     )

@@ -22,6 +22,12 @@ vi_segmenter = VnCoreNLP(
     annotators=["wseg"],
 )
 
+model_dir = os.path.join(WORKING_DIR, "models/summary/checkpoint-1100")
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+tokenizer = AutoTokenizer.from_pretrained(model_dir)
+model = MBartForConditionalGeneration.from_pretrained(model_dir)
+
 
 def wseg(sent=""):
     sentences = vi_segmenter.word_segment(sent)
@@ -48,12 +54,15 @@ def generate_prompt(context, no_sen=5):
     return prompt_wseg
 
 
-if __name__ == "__main__":
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    pretrained_model = os.path.join(WORKING_DIR, "models/summary/checkpoint-1100")
-    tokenizer = AutoTokenizer.from_pretrained(pretrained_model)
-    model = MBartForConditionalGeneration.from_pretrained(pretrained_model)
+def bartpho_summarise(context, no_sen=5):
+    prompt = generate_prompt(context, no_sen=no_sen)
+    input_ids = tokenizer.encode(prompt, return_tensors="pt", max_length=1024, truncation=True)
+    output_ids = model.generate(input_ids, max_length=1024, num_return_sequences=1, num_beams=1)
+    result = tokenizer.decode(output_ids[0], skip_special_tokens=False)
 
+    return result, prompt
+
+if __name__ == "__main__":
     with open(
         "/home2/dungnguyen/time-series-event-extraction/archive/articles-sample.json"
     ) as f:
@@ -72,27 +81,18 @@ if __name__ == "__main__":
         record["content"] = clean_article(article)
 
         for no_sen in range(3, 10):
-            prompt = generate_prompt(record["content"], no_sen=no_sen)
+            record[f"sum_{no_sen}"], prompt = bartpho_summarise(record["content"], no_sen)
             # print(f"PROMPT:\n{prompt}")
-
-            input_ids = tokenizer.encode(
-                prompt, return_tensors="pt", max_length=1024, truncation=True
-            )
-            output_ids = model.generate(
-                input_ids, max_length=1024, num_return_sequences=1, num_beams=1
-            )
-
-            record[f"sum_{no_sen}"] = tokenizer.decode(
-                output_ids[0], skip_special_tokens=False
-            )
             # print("----------------")
             # print(f"RESULT:\n{record[f'sum_{no_sen}']}")
+            # break
+        # break
 
         summary_data.append(record)
 
     df = pd.DataFrame(summary_data)
     df.to_excel(
-        os.path.join(WORKING_DIR, "data/231011_summary_bartpho.xlsx"),
+        os.path.join(WORKING_DIR, "data/result/231011_summary_bartpho.xlsx"),
         sheet_name="summary",
         index=False,
     )
