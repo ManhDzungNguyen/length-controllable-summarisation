@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Website Summarization</title>
+	<link href="summarization.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<div class="container">
+		<div class="header">
+			<h1 class="title">Website Summarization</h1>
+			<p id="settingsBtn">settings</p>
+		</div>
+
+		<div class="main">
+			<!-- <div class="main-prompt">
+					<textarea name="selectedText" type="text" id="selectedText"></textarea>
+				</div> -->
+			<div class="options">
+				<button id="summarizationBtn">Summarize</button>
+			</div>
+		</div>
+
+		<div class="responseBody">
+			<p id="response"></p>
+		</div>
+
+		<div class="settings">
+			<div class="settings-input">
+				<label># Sentences:</label>
+				<input name="nosentence" type="number" />
+			</div>
+			<div class="settings-input">
+				<label># Max tokens:</label>
+				<input name="notoken" type="number" />
+			</div>
+			<button type="submit" id="saveBtn">Save</button>
+		</div>
+
+	</div>
+	<script src="popup.js"></script>
+</body>
+
+</html>

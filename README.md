@@ -1,12 +1,13 @@
 # length-controllable-summarisation
 
-## Setup Environment
+## vi
+### Setup Environment
 - Python 3.8
 - Create new virtual environment: `python3.8 -m venv venv`
 - Update pip: `pip install -U pip`
 - Install required packages: `pip install -r requirements.txt`
 
-## BARTpho
+### BARTpho
 Before quantizing the BartPho model checkpoint with ctranslate2, please ensure the following:
 
 - Save the tokenizer in the checkpoint directory.

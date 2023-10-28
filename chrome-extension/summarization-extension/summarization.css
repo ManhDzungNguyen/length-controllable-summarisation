@@ -1,0 +1,166 @@
+:root {
+	--primary-color: rgb(255, 255, 255);
+	--secondary-color: rgb(122, 129, 148);
+	--bg-color: rgb(27, 32, 45);
+	--secondary-bg-color: rgb(41, 47, 63);
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+	scroll-behavior: smooth !important;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+a {
+	color: inherit;
+	text-decoration: none;
+}
+p{
+	margin: 0px;
+}
+h1,h2,h3,h4,h5,h6{
+	margin: 0px;
+}
+* {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+
+.container{
+	display: flex;
+	flex-direction: column;
+	width: 500px;
+	background: var(--bg-color)
+}
+
+.header{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px;
+}
+.header .title{
+	font-size: 16px;
+	color: var(--primary-color);
+}
+.header p{
+	font-size: 15px;
+	color: var(--secondary-color);
+	cursor: pointer;
+}
+
+.main{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 5px 0px;
+	width: 100%;
+	padding: 15px;
+}
+.main-prompt{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 10px 0px;
+	width: 100%;
+}
+.main-prompt textarea{
+	font-size: 16px;
+	color: var(--primary-color);
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	background: var(--secondary-bg-color);
+	width: 350px;
+	max-width: 350px;
+	min-width: 350px;
+	max-height: 400px;
+	padding: 10px;
+	border-radius: 10px;
+	outline: none;
+	border: none;
+}
+.main .options{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 12px 0px;
+}
+button{
+	background: var(--secondary-bg-color);
+	color: var(--primary-color);
+	height: 30px;
+	width: 80px;
+	cursor: pointer;
+	border-radius: 10px;
+	border: none;
+}
+button:hover{
+	background: var(--secondary-color);
+}
+
+.responseBody{
+	display: none;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 5px 0px;
+	width: 100%;
+	visibility: hidden;
+	background: var(--secondary-bg-color);
+}
+.responseBody p{
+	font-size: 16px;
+	font-weight: 300;
+	color: var(--primary-color);
+	padding: 15px;
+}
+
+.settings{
+	display: none;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 15px;
+	visibility: hidden;
+	width: 100%;
+	padding: 15px;
+}
+.settings .settings-input{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 0px 10px;
+	width: 100%;
+}
+.settings label{
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--primary-color);
+	width: 100px;
+}
+.settings input,
+.settings textarea{
+	font-size: 15px;
+	font-weight: 400;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	color: var(--primary-color);
+	background: var(--secondary-bg-color);
+	outline: none;
+	border-radius: 10px;
+	border: none;
+	width: 350px;
+	min-width: 350px;
+	max-width: 350px;
+	min-height: 40px;
+	max-height: 400px;
+	padding: 10px;
+}
