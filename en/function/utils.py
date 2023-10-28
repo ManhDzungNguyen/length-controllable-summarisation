@@ -27,11 +27,9 @@ def transform_serial_numbers(text):
 
 
 def post_process(raw_summary, remove_duplicated_sentences=False):
+    raw_summary =raw_summary.split("</s>")[0]
     if raw_summary.startswith("<pad>"):
         raw_summary = raw_summary[5:]
-
-    if raw_summary.endswith("</s>"):
-        raw_summary = raw_summary[:-4]
 
     # try:
     prefix, root = raw_summary.split("[SEP]", 1)
