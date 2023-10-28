@@ -49,8 +49,8 @@ for i in tqdm(range(0, len(data), batch_size)):
 
     filename = 'eval_res.txt'
 
-    with open(filename, 'w') as file:
-        for item in decoded_predictions:
+    with open(filename, 'a') as file:
+        for item in decoded_batch_predictions:
             file.write(f'{item}\n')
 
 for reference, prediction in zip(actual_summaries, decoded_predictions):
