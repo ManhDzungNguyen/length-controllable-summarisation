@@ -7,7 +7,7 @@ from function.text_extraction import extract_data
 from function.text_summarisation import text_summarisation
 
 
-app = FastAPI(title="Summarisation")
+app = FastAPI(title="Summarization")
 
 
 app.add_middleware(
@@ -23,11 +23,10 @@ app.add_middleware(
 async def summarisation(item: Input):
     url = item.url
     content = extract_data(url)
-    summary = text_summarisation(content, no_tokens=item.no_tokens, no_sens=item.no_sentences)
-    # result = f"# sens: {item.no_sentences} | # tokens: {item.no_tokens} || {summary}"
-    return {
-        "result": summary
-    }
+    summary = text_summarisation(
+        content, no_tokens=item.no_tokens, no_sens=item.no_sentences
+    )
+    return {"result": summary}
 
 
 if __name__ == "__main__":

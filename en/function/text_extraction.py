@@ -8,27 +8,19 @@ from selenium.webdriver.chrome.options import Options
 
 def extract_data(url: str) -> str:
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Ensure GUI is off
+    chrome_options.add_argument("--headless")  # Turn off GUI
     chrome_options.add_argument("--no-sandbox")
-
     homedir = os.path.expanduser("~")
     webdriver_service = Service(f"{homedir}/chromedriver/stable/chromedriver")
 
-    # Choose Chrome Browser
     driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
 
     content = ""
     try:
-        # Direct the browser to the target URL
         driver.get(url)
-
-        # Give the JavaScript time to render (if necessary)
-        time.sleep(1)
-
         xpath_expression = "//*[self::p or self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::h6]"
-        # print("OK1")
         elements = driver.find_elements("xpath", xpath_expression)
-        # print("OK2")
+
         for element in elements:
             if element.text.strip():
                 content += "".join(["\n", element.text])
@@ -49,7 +41,6 @@ def extract_data(url: str) -> str:
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:
-        # It's important to close the browser after scraping.
         driver.quit()
 
     return content

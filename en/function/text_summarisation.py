@@ -5,7 +5,7 @@ tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-small")
 new_special_tokens = ["[SN]", "[SEP]"]  # for example
 tokenizer.add_special_tokens({"additional_special_tokens": ["[SN]", "[SEP]"]})
 model = T5ForConditionalGeneration.from_pretrained(
-    "/home/kuuhaku/work/length-controllable-summarisation/models/sentenum_lengthinstruct/checkpoint-2000"
+    "/home/kuuhaku/work/length-controllable-summarisation/en/models/sentenum_lengthinstruct/checkpoint-2000"
 )
 
 
