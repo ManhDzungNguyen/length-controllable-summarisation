@@ -1,5 +1,5 @@
 # length-controllable-summarisation
-An (unofficial) implementation of SentEnum, as described in paper [Summarization with Precise Length Control]("https://arxiv.org/abs/2305.05171").
+An (unofficial) implementation of SentEnum, as described in paper [Summarization with Precise Length Control](https://arxiv.org/abs/2305.05171).
 
 ## en (English)
 ### Setup Environment
