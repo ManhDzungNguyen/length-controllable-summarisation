@@ -1,13 +1,14 @@
 # length-controllable-summarisation
+An (unofficial) implementation of SentEnum, as described in paper [Summarization with Precise Length Control]("https://arxiv.org/abs/2305.05171").
 
-## en
+## en (English)
 ### Setup Environment
 - Python 3.10
 - Create new virtual environment: `python3.10 -m venv venv`
 - Update pip: `pip install -U pip`
 - Install required packages: `pip install -r requirements.txt`
 
-## vi
+## vi (Vietnamese)
 ### Setup Environment
 - Python 3.8
 - Create new virtual environment: `python3.8 -m venv venv`
