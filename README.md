@@ -1,5 +1,12 @@
 # length-controllable-summarisation
 
+## en
+### Setup Environment
+- Python 3.10
+- Create new virtual environment: `python3.10 -m venv venv`
+- Update pip: `pip install -U pip`
+- Install required packages: `pip install -r requirements.txt`
+
 ## vi
 ### Setup Environment
 - Python 3.8
